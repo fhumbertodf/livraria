@@ -7,27 +7,25 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.inject.Inject;
 
-public class MessageHelper implements Serializable{
-	
-	
+public class MessageHelper implements Serializable {
+
 	private static final long serialVersionUID = -343495439544517197L;
-	
+
 	private FacesContext context;
 	private Flash flash;
-	
+
 	@Inject
-	public MessageHelper(FacesContext context, Flash flash){
+	public MessageHelper(FacesContext context, Flash flash) {
 		this.context = context;
 		this.flash = flash;
 	}
 
-	
-	public MessageHelper onFlash(){
+	public MessageHelper onFlash() {
 		flash.setKeepMessages(true);
 		return this;
 	}
-	
-	public void addMessage(FacesMessage message){
+
+	public void addMessage(FacesMessage message) {
 		addMessage(null, message);
 	}
 
