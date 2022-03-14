@@ -1,4 +1,4 @@
-package br.com.alura.livraria.tx.annotation;
+package br.com.alura.livraria.tx;
 
 import java.io.Serializable;
 
@@ -7,6 +7,8 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
+
+import br.com.alura.livraria.tx.annotation.Transacional;
 
 @Interceptor
 @Transacional
