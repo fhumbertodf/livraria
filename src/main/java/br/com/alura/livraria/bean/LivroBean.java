@@ -25,7 +25,7 @@ public class LivroBean implements Serializable {
 	private Integer autorId;
 
 	private List<Livro> livros;
-	
+
 	public void setAutorId(Integer autorId) {
 		this.autorId = autorId;
 	}
@@ -40,7 +40,7 @@ public class LivroBean implements Serializable {
 
 	public List<Livro> getLivros() {
 		DAO<Livro> dao = new DAO<Livro>(Livro.class);
-		if(this.livros == null) {
+		if (this.livros == null) {
 			this.livros = dao.listaTodos();
 		}
 		return livros;
@@ -55,9 +55,9 @@ public class LivroBean implements Serializable {
 	}
 
 	public void carregarLivroPelaId() {
-		this.livro = new DAO<Livro>(Livro.class).buscaPorId(this.livro.getId()); 
+		this.livro = new DAO<Livro>(Livro.class).buscaPorId(this.livro.getId());
 	}
-	
+
 	public void gravarAutor() {
 		Autor autor = new DAO<Autor>(Autor.class).buscaPorId(this.autorId);
 		this.livro.adicionaAutor(autor);
@@ -74,7 +74,7 @@ public class LivroBean implements Serializable {
 		}
 
 		DAO<Livro> dao = new DAO<Livro>(Livro.class);
-		if(this.livro.getId() == null) {
+		if (this.livro.getId() == null) {
 			dao.adiciona(this.livro);
 			this.livros = dao.listaTodos();
 		} else {
@@ -90,28 +90,26 @@ public class LivroBean implements Serializable {
 		dao.remove(livro);
 		this.livros = dao.listaTodos();
 	}
-	
+
 	public void removerAutorDoLivro(Autor autor) {
 		this.livro.removeAutor(autor);
 	}
-	
+
 	public void carregar(Livro livro) {
 		System.out.println("Carregando livro");
 		this.livro = livro;
 	}
-	
+
 	public String formAutor() {
 		System.out.println("Chamanda do formulário do Autor.");
 		return "autor?faces-redirect=true";
 	}
 
-	public void comecaComDigitoUm(FacesContext fc, UIComponent component,
-			Object value) throws ValidatorException {
+	public void comecaComDigitoUm(FacesContext fc, UIComponent component, Object value) throws ValidatorException {
 
 		String valor = value.toString();
 		if (!valor.startsWith("1")) {
-			throw new ValidatorException(new FacesMessage(
-					"ISBN deveria começar com 1"));
+			throw new ValidatorException(new FacesMessage("ISBN deveria começar com 1"));
 		}
 
 	}
