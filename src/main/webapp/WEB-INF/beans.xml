@@ -5,4 +5,7 @@
        version="1.2" bean-discovery-mode="all">
 
     <!-- some content -->
+    <interceptors>
+    	<class>br.com.alura.livraria.tx.GerenciadorDeTransacao</class>
+    </interceptors>
 </beans>
