@@ -13,43 +13,44 @@ import br.com.alura.livraria.jsf.annotation.ScopeMap;
 import br.com.alura.livraria.jsf.annotation.ScopeMap.Scope;
 
 public class JSFFactory {
-
+	
 	@Produces
 	@RequestScoped
-	public FacesContext getFacesContext() {
+	public FacesContext getFacesContext(){
 		return FacesContext.getCurrentInstance();
 	}
-
+	
+	
 	@Produces
 	@RequestScoped
-	public Flash getFlash() {
+	public Flash getFlash(){
 		return getExternalContext().getFlash();
 	}
-
+	
 	@Produces
 	@ScopeMap(Scope.REQUEST)
-	public Map<String, Object> reqeustMap() {
+	public Map<String, Object> reqeustMap(){
 		return getExternalContext().getRequestMap();
 	}
-
+	
 	@Produces
 	@ScopeMap(Scope.SESSION)
-	public Map<String, Object> sessionMap() {
+	public Map<String, Object> sessionMap(){
 		return getExternalContext().getSessionMap();
 	}
-
+	
 	@Produces
 	@ScopeMap(Scope.APPLICATION)
-	public Map<String, Object> applicationMap() {
+	public Map<String, Object> applicationMap(){
 		return getExternalContext().getApplicationMap();
 	}
 
 	@Produces
 	@RequestScoped
-	public NavigationHandler getNavigationHandler() {
+	public NavigationHandler getNavigationHandler(){
 		return getFacesContext().getApplication().getNavigationHandler();
 	}
-
+	
 	private ExternalContext getExternalContext() {
 		return getFacesContext().getExternalContext();
 	}

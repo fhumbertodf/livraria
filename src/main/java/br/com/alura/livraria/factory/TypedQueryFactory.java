@@ -15,17 +15,17 @@ public class TypedQueryFactory {
 	@Inject
 	private EntityManager em;
 
+	@SuppressWarnings("unchecked")
 	@Produces
 	@Query("")
-	public <X> TypedQuery<X> factory(InjectionPoint point){
-		
+	public <X> TypedQuery<X> factory(InjectionPoint point) {
+
 		ParameterizedType type = (ParameterizedType) point.getType();
 		
-		@SuppressWarnings("unchecked")
 		Class<X> classe = (Class<X>) type.getActualTypeArguments()[0];
-		
+
 		String jpql = point.getAnnotated().getAnnotation(Query.class).value();
 		return em.createQuery(jpql, classe);
 	}
-	
+
 }

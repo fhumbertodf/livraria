@@ -5,15 +5,15 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import javax.inject.Qualifier;
+import javax.enterprise.inject.Stereotype;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
-@Qualifier
-@Target({ElementType.METHOD,ElementType.PARAMETER, ElementType.FIELD})
+@Stereotype
+@Named
+@ViewScoped
+@Target({ ElementType.TYPE, ElementType.FIELD, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ScopeMap {
-	ScopeMap.Scope value();
-	
-	enum Scope{
-		REQUEST,SESSION, APPLICATION;
-	}
+public @interface ViewModel {
+
 }

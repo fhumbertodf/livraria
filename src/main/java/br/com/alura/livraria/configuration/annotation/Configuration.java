@@ -1,4 +1,4 @@
-package br.com.alura.livraria.jsf.annotation;
+package br.com.alura.livraria.configuration.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -8,12 +8,8 @@ import java.lang.annotation.Target;
 import javax.inject.Qualifier;
 
 @Qualifier
-@Target({ElementType.METHOD,ElementType.PARAMETER, ElementType.FIELD})
+@Target({ ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ScopeMap {
-	ScopeMap.Scope value();
-	
-	enum Scope{
-		REQUEST,SESSION, APPLICATION;
-	}
+public @interface Configuration {
+
 }
