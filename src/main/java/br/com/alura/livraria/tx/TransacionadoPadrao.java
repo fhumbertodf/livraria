@@ -1,27 +1,18 @@
-package br.com.alura.livraria.tx.annotation;
+package br.com.alura.livraria.tx;
 
-import java.io.Serializable;
-
+import javax.enterprise.inject.Typed;
 import javax.inject.Inject;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 
-@Interceptor
-@Transacional
-public class GerenciadorDeTransacao implements Serializable {
+@Typed(Transacionado.class)
+public class TransacionadoPadrao implements Transacionado {
 
-	private static final long serialVersionUID = -1392064408660679407L;
-
-	private EntityManager em;
+	private static final long serialVersionUID = -6107081772273959401L;
 
 	@Inject
-	public GerenciadorDeTransacao(EntityManager em) {
-		this.em = em;
-	}
+	protected EntityManager em;
 
-	@AroundInvoke
 	public Object executaComTransacao(InvocationContext context) {
 		em.getTransaction().begin();
 
@@ -36,7 +27,6 @@ public class GerenciadorDeTransacao implements Serializable {
 
 			throw new RuntimeException(e);
 		}
-
 	}
 
 }

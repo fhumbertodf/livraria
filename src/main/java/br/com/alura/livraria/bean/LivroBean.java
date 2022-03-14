@@ -3,6 +3,7 @@ package br.com.alura.livraria.bean;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -12,6 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.alura.livraria.dao.DAO;
+import br.com.alura.livraria.helper.MessageHelper;
 import br.com.alura.livraria.modelo.Autor;
 import br.com.alura.livraria.modelo.Livro;
 import br.com.alura.livraria.tx.annotation.Transacional;
@@ -32,10 +34,18 @@ public class LivroBean implements Serializable {
 
 	private DAO<Livro> livroDao;
 
+	private MessageHelper helper;
+
 	@Inject
-	public LivroBean(DAO<Livro> livroDao, DAO<Autor> autorDao) {
+	public LivroBean(DAO<Livro> livroDao, DAO<Autor> autorDao, MessageHelper helper) {
 		this.livroDao = livroDao;
 		this.autorDao = autorDao;
+		this.helper = helper;
+	}
+
+	@PostConstruct
+	public void postConstruct() {
+		this.livros = livroDao.listaTodos();
 	}
 
 	public void setAutorId(Integer autorId) {
@@ -51,10 +61,6 @@ public class LivroBean implements Serializable {
 	}
 
 	public List<Livro> getLivros() {
-
-		if (this.livros == null) {
-			this.livros = livroDao.listaTodos();
-		}
 		return livros;
 	}
 
@@ -81,8 +87,7 @@ public class LivroBean implements Serializable {
 		System.out.println("Gravando livro " + this.livro.getTitulo());
 
 		if (livro.getAutores().isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage("autor",
-					new FacesMessage("Livro deve ter pelo menos um Autor."));
+			helper.addMessage("autor", new FacesMessage("Livro deve ter pelo menos um Autor."));
 			return;
 		}
 
