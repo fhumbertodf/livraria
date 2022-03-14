@@ -16,12 +16,12 @@ public class DAOFactory {
 	private EntityManager manger;
 
 	@Produces
-	public <T> DAO<T> factory(InjectionPoint point){
-		
+	public <T> DAO<T> factory(InjectionPoint point) {
+
 		ParameterizedType type = (ParameterizedType) point.getType();
-		
+
 		Class<T> classe = (Class<T>) type.getActualTypeArguments()[0];
 		return new DAO<T>(classe, manger);
 	}
-	
+
 }
