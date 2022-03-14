@@ -6,6 +6,6 @@
 
     <!-- some content -->
     <interceptors>
-    	<class>br.com.alura.livraria.tx.GerenciadorDeTransacao</class>
+    	<class>br.com.alura.livraria.tx.MeuGerenciadorDeTransacao</class>
     </interceptors>
 </beans>
